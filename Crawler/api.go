@@ -113,7 +113,7 @@ func (data *contestMetadata) fetchContestInfo() {
 }
 
 func (data *contestMetadata) printUserRecord(user *userScore) {
-	fmt.Printf("+====== %15s (%s) ======+\n", user.Handle, user.Country)
+	fmt.Printf("+====== %-15s (%s) ======+\n", user.Handle, user.Country)
 	fmt.Printf("Rank %v Score %v\n\n", user.Rank, user.Score)
 
 	for _, curTask := range data.contestInfo.Tasks {

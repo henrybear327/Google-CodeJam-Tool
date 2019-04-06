@@ -15,7 +15,10 @@ handles = [
     "allenwhale", 
     "betaveros",
     "morrisy",
-    "dreamoon_love_AA"] 
+    "dreamoon_love_AA",
+    "SouthRa",
+    "tmt514", 
+    ] 
 
 # refresh interval in second
 refreshInterval = 60 
