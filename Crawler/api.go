@@ -136,37 +136,33 @@ func (data *contestMetadata) printUserRecord(user *userScore) {
 	}
 }
 
-func (data *contestMetadata) prettyPrint(response *apiResponse, isSingle bool) {
-	data.Lock()
-	defer data.Unlock()
-
-	if isSingle {
-		if len(response.UserScores) != 1 {
-			log.Fatalln("Incorrect user count", len(response.UserScores))
-		}
-		user := response.UserScores[0]
-		data.printUserRecord(&user)
-	} else {
-
-	}
-}
-
 func (data *contestMetadata) GetHandleResults(handles []string) {
-	var wg sync.WaitGroup
+	results := make(userScores, len(handles))
+	ch := make(chan userScore)
 	for _, handle := range handles {
-		wg.Add(1)
-		go data.fetchHandleResult(handle, &wg)
+		go data.fetchHandleResult(handle, ch)
 	}
-	wg.Wait()
+
+	for i := 0; i < len(handles); i++ {
+		results[i] = <-ch
+	}
+
+	sort.Sort(results)
+	for _, user := range results {
+		data.printUserRecord(&user)
+	}
 }
 
-func (data *contestMetadata) fetchHandleResult(handle string, wg *sync.WaitGroup) {
+func (data *contestMetadata) fetchHandleResult(handle string, ch chan userScore) {
 	param := make([]interface{}, 1)
 	param[0] = handle
 	response := data.fetchResponseBody(1, param)
 
-	data.prettyPrint(response, true)
-	wg.Done()
+	if len(response.UserScores) != 1 {
+		log.Fatalln("Incorrect user count", len(response.UserScores))
+	}
+
+	ch <- response.UserScores[0]
 }
 
 func (data *contestMetadata) GetAllContestantData(country string) {
@@ -194,8 +190,6 @@ func (data *contestMetadata) fetchAllContestantData(country string) {
 			data.Lock()
 			data.userScores = append(data.userScores, response.UserScores...)
 			data.Unlock()
-
-			data.prettyPrint(response, false)
 
 			log.Println("Done", starting)
 			wg.Done()
