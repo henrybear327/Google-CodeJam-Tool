@@ -1,5 +1,13 @@
 # Google Codejam scoreboard parser
 
+# Usage
+
+* Modify `config.toml`
+* Run the `makefile`
+* Run `./main --help` to see the commands
+
+# Notes
+
 * results can be obtained from api
 * payload is in JSON, encoded in base64 in URL
 
