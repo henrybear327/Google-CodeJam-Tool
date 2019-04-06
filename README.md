@@ -1,4 +1,4 @@
-# Google-CodeJam-Scoreboard-Crawler
+# Google CodeJam Friend List Generator
 
 Since the latest Google CodeJam scoreboard doesn't have the `friend list` feature that we all liked, I decided to write one just for fun and practice.
 
