@@ -25,7 +25,8 @@ func main() {
 	case 1:
 		api.GetHandleResults(config.Handles)
 	case 2:
-		api.GetAllContestantData("Taiwan")
+		// api.GetAllContestantData("Taiwan")
+		api.GetAllContestantData("")
 	default:
 		log.Fatalln("No such operation")
 	}

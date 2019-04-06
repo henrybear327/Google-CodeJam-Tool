@@ -171,6 +171,8 @@ func (data *contestMetadata) GetAllContestantData(country string) {
 	for _, contestant := range data.userScores {
 		if len(country) > 0 && contestant.Country == country {
 			data.printUserRecord(&contestant)
+		} else if len(country) == 0 {
+			data.printUserRecord(&contestant)
 		}
 	}
 }
