@@ -10,6 +10,7 @@ type tomlConfig struct {
 	ContestID       string
 	Handles         []string
 	RefreshInterval int
+	ConcurrentFetch int
 }
 
 func parseConfigFile() *tomlConfig {

@@ -23,7 +23,7 @@ func getHandleSearchPayload(handle string) string {
 func (data *ContestMetadata) fetchHandleResult(handle string, ch chan userScore) {
 	param := make([]interface{}, 1)
 	param[0] = handle
-	response := fetchAPIResponseBody(specificHandleType, data.ContestID, param)
+	response := fetchAPIResponse(specificHandleType, data.ContestID, param).(*scoreboardResponse)
 
 	if len(response.UserScores) != 1 {
 		log.Fatalln("Incorrect user count", len(response.UserScores))

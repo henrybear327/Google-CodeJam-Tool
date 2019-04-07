@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"sort"
-	"sync"
 )
 
 type apiType int
@@ -26,19 +25,7 @@ const (
 	specificHandleAPI  string = "https://codejam.googleapis.com/scoreboard/%s/find?p=%s"
 )
 
-type ContestMetadata struct {
-	ContestID string
-
-	TotalContestants int
-	StepSize         int
-
-	ContestInfo challenge
-	UserScores  userScores
-
-	sync.Mutex
-}
-
-func fetchAPIResponse(url string) []byte {
+func fetchAPI(url string) []byte {
 	// log.Println("url", url)
 	resp, err := http.Get(url)
 	handleErr(err)
@@ -55,7 +42,7 @@ func fetchAPIResponse(url string) []byte {
 	return result
 }
 
-func fetchAPIResponseBody(fetchType apiType, contestID string, param []interface{}) *apiResponse {
+func fetchAPIResponse(fetchType apiType, contestID string, param []interface{}) interface{} {
 	url := ""
 
 	switch fetchType {
@@ -66,18 +53,44 @@ func fetchAPIResponseBody(fetchType apiType, contestID string, param []interface
 		starting := param[0].(int)
 		step := param[1].(int)
 		url = fmt.Sprintf(scoreboardAPI, contestID, getScoreboardPaginationPayload(starting, step))
+	case specificContestType:
+		contestID := param[0].(string)
+		url = fmt.Sprintf(specificContestAPI, contestID)
 	default:
 		log.Fatalln("Unknown option")
 	}
 
-	result := fetchAPIResponse(url)
+	result := fetchAPI(url)
 
-	var response apiResponse
-	err := json.Unmarshal(result, &response)
-	handleErr(err)
-	// log.Println(response)
+	switch fetchType {
+	case specificHandleType: // handle search
+		var response scoreboardResponse
+		err := json.Unmarshal(result, &response)
+		handleErr(err)
+		// log.Println(response)
 
-	return &response
+		return &response
+	case scoreboardType: // dump scoreboard
+		var response scoreboardResponse
+		err := json.Unmarshal(result, &response)
+		handleErr(err)
+		// log.Println(response)
+
+		return &response
+	case specificContestType:
+		contestID := param[0].(string)
+		url = fmt.Sprintf(specificContestAPI, contestID)
+
+		var response contestResponse
+		err := json.Unmarshal(result, &response)
+		handleErr(err)
+		// log.Println(response)
+
+		return &response
+	default:
+		log.Fatalln("Unknown option")
+		return nil
+	}
 }
 
 func (data *ContestMetadata) printUserRecord(user *userScore) {
@@ -136,6 +149,6 @@ func (data *ContestMetadata) GetAllContestantData(country string) {
 // GetJSONResponse dumps the response from the specified url
 // The url must be one of the api requests
 func (data *ContestMetadata) GetJSONResponse(url string) {
-	response := fetchAPIResponse(url)
+	response := fetchAPI(url)
 	fmt.Println(string(response))
 }

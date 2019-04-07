@@ -17,6 +17,12 @@ func main() {
 	// load config file
 	config := parseConfigFile()
 
+	contest := api.ContestData{}
+	err := contest.FetchContest(config.ContestID, config.ConcurrentFetch, false)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
 	apiObject := api.ContestMetadata{ContestID: config.ContestID, StepSize: 100}
 	apiObject.FetchContestInfo()
 

@@ -7,7 +7,7 @@ import (
 	"sync"
 )
 
-type apiResponse struct {
+type scoreboardResponse struct {
 	ScoreboardSize int `json:"full_scoreboard_size"`
 
 	Challenge  challenge   `json:"challenge"`
@@ -74,7 +74,7 @@ func (data *ContestMetadata) fetchAllContestantData(country string) {
 			param := make([]interface{}, 2)
 			param[0] = starting
 			param[1] = step
-			response := fetchAPIResponseBody(scoreboardType, data.ContestID, param)
+			response := fetchAPIResponse(scoreboardType, data.ContestID, param).(*scoreboardResponse)
 
 			data.Lock()
 			data.UserScores = append(data.UserScores, response.UserScores...)
@@ -88,4 +88,49 @@ func (data *ContestMetadata) fetchAllContestantData(country string) {
 
 	// sort by rank
 	sort.Sort(data.UserScores)
+}
+
+func (data *ContestData) fetchScoreboard(startingRank int, contestantChannel chan userScores, pool chan bool, wg *sync.WaitGroup) {
+	log.Println("Starting from rank", startingRank)
+
+	param := make([]interface{}, 2)
+	param[0] = startingRank
+	param[1] = data.stepSize
+	response := fetchAPIResponse(scoreboardType, data.contestID, param).(*scoreboardResponse)
+
+	contestantChannel <- response.UserScores
+
+	log.Println("Done", startingRank)
+	<-pool
+	wg.Done()
+}
+
+func (data *ContestData) mergeContestants(contestantChannel chan userScores) {
+	for {
+		tmp, more := <-contestantChannel
+		if more == false {
+			return
+		}
+		data.contestants = append(data.contestants, tmp...)
+	}
+}
+
+func (data *ContestData) fetchAllContestantData(concurrentFetch int) {
+	contestantChannel := make(chan userScores, concurrentFetch)
+	pool := make(chan bool, concurrentFetch)
+	go data.mergeContestants(contestantChannel)
+
+	var wg sync.WaitGroup
+	for i := 1; i <= data.totalContestants; i += data.stepSize {
+		pool <- true
+		wg.Add(1)
+		go data.fetchScoreboard(i, contestantChannel, pool, &wg)
+	}
+
+	wg.Wait()
+	close(pool)
+	close(contestantChannel)
+
+	// sort users by rank
+	sort.Sort(data.contestants)
 }

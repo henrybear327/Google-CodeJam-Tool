@@ -1,7 +1,7 @@
 package api
 
 // the response object of allContestsURL
-type contests struct {
+type contestsResponse struct {
 	Adventures []adventure `json:"adventures"`
 }
 
