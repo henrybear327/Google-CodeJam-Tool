@@ -7,7 +7,49 @@ import (
 	"sync"
 )
 
-const scoreboardPaginationURL = "https://codejam.googleapis.com/scoreboard/%s/poll?p=%s"
+type apiResponse struct {
+	ScoreboardSize int `json:"full_scoreboard_size"`
+
+	Challenge  challenge   `json:"challenge"`
+	UserScores []userScore `json:"user_scores"`
+}
+
+type taskInfo struct {
+	TaskID string `json:"task_id"`
+	Point  int    `json:"score"`
+
+	Attempts int `json:"total_attempts"`
+
+	AC            int `json:"tests_definitely_solved"`
+	PretestPassed int `json:"tests_possibly_solved"`
+
+	WA   int   `json:"penalty_attempts"`
+	WAms int64 `json:"penalty_micros"`
+}
+
+type userScores []userScore
+
+func (t userScores) Len() int {
+	return len(t)
+}
+func (t userScores) Swap(i, j int) {
+	t[i], t[j] = t[j], t[i]
+}
+func (t userScores) Less(i, j int) bool {
+	// sort by rank
+	return t[i].Rank < t[j].Rank
+}
+
+type userScore struct {
+	Handle  string `json:"displayname"`
+	Country string `json:"country"`
+	Rank    int    `json:"rank"`
+
+	Score  int   `json:"score_1"`
+	Score2 int64 `json:"score_2"`
+
+	TasksInfo []taskInfo `json:"task_info"`
+}
 
 type scoreboardPaginationPayload struct {
 	// {"min_rank":11,"num_consecutive_users":10}
@@ -32,7 +74,7 @@ func (data *ContestMetadata) fetchAllContestantData(country string) {
 			param := make([]interface{}, 2)
 			param[0] = starting
 			param[1] = step
-			response := data.fetchResponseBody(2, param)
+			response := data.fetchAPIResponseBody(scoreboardType, param)
 
 			data.Lock()
 			data.UserScores = append(data.UserScores, response.UserScores...)

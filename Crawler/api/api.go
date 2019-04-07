@@ -10,6 +10,23 @@ import (
 	"sync"
 )
 
+const (
+	allContestsAPI     string = "https://codejam.googleapis.com/poll?p=e30"
+	scoreboardAPI      string = "https://codejam.googleapis.com/scoreboard/%s/poll?p=%s"
+	specificContestAPI string = "https://codejam.googleapis.com/dashboard/%s/poll?p=e30"
+	specificHandleAPI  string = "https://codejam.googleapis.com/scoreboard/%s/find?p=%s"
+)
+
+type apiType int
+
+const (
+	allContestType apiType = iota
+	scoreboardType
+	specificContestType
+	specificHandleType
+	dumpJSONResponseType
+)
+
 type ContestMetadata struct {
 	ContestID string
 
@@ -22,7 +39,7 @@ type ContestMetadata struct {
 	sync.Mutex
 }
 
-func fetchResponse(url string) []byte {
+func fetchAPIResponse(url string) []byte {
 	// log.Println("url", url)
 	resp, err := http.Get(url)
 	handleErr(err)
@@ -39,22 +56,24 @@ func fetchResponse(url string) []byte {
 	return result
 }
 
-func (data *ContestMetadata) fetchResponseBody(fetchType int, param []interface{}) *apiResponse {
+func (data *ContestMetadata) fetchAPIResponseBody(fetchType apiType, param []interface{}) *apiResponse {
 	url := ""
-	if fetchType == 1 { // handle search
+
+	switch fetchType {
+	case specificHandleType: // handle search
 		handle := param[0].(string)
-		url = fmt.Sprintf(findHandleURL, data.ContestID, data.getHandleSearchPayload(handle))
-	} else if fetchType == 2 { // dump scoreboard
+		url = fmt.Sprintf(specificHandleAPI, data.ContestID, data.getHandleSearchPayload(handle))
+	case scoreboardType: // dump scoreboard
 		starting := param[0].(int)
 		step := param[1].(int)
-		url = fmt.Sprintf(scoreboardPaginationURL, data.ContestID, data.getScoreboardPaginationPayload(starting, step))
-	} else if fetchType == 3 {
+		url = fmt.Sprintf(scoreboardAPI, data.ContestID, data.getScoreboardPaginationPayload(starting, step))
+	case dumpJSONResponseType:
 		url = param[0].(string)
-	} else {
+	default:
 		log.Fatalln("Unknown option")
 	}
 
-	result := fetchResponse(url)
+	result := fetchAPIResponse(url)
 
 	var response apiResponse
 	err := json.Unmarshal(result, &response)
@@ -76,7 +95,7 @@ func (data *ContestMetadata) printUserRecord(user *userScore) {
 		}
 
 		for _, task := range user.TasksInfo {
-			if curTask.TaskID == task.TaskID {
+			if curTask.ID == task.TaskID {
 				fmt.Printf("%2d / %2d\n", task.Point, totalPoint)
 				goto found
 			}
@@ -118,6 +137,6 @@ func (data *ContestMetadata) GetAllContestantData(country string) {
 }
 
 func (data *ContestMetadata) GetJSONResponse(url string) {
-	response := fetchResponse(url)
+	response := fetchAPIResponse(url)
 	fmt.Println(string(response))
 }
