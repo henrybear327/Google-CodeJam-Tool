@@ -13,12 +13,6 @@ var country = flag.String("country", "", "The country name (for operation 2)")
 func main() {
 	flag.Parse()
 
-	// special characters causing base64 decoding error
-	// test := "Pożeracz_pączków_z_lukrem"
-	// lol := encodeToBase64([]byte(test))
-	// fmt.Println(lol)
-	// fmt.Println(decodeFromBase64([]byte(lol)))
-
 	// init
 	config := parseConfigFile()
 	apiObject := api.ContestMetadata{ContestID: config.ContestID, StepSize: 100}

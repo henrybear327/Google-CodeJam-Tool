@@ -32,7 +32,8 @@ func fetchResponse(url string) []byte {
 	handleErr(err)
 	// log.Println(string(body))
 
-	result := decodeFromBase64(body)
+	result, err := decodeFromBase64(body)
+	handleErr(err)
 	// log.Println(string(result))
 
 	return result

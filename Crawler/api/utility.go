@@ -12,13 +12,16 @@ func handleErr(err error) {
 }
 
 func encodeToBase64(input []byte) string {
-	str := base64.URLEncoding.EncodeToString(input)
+	str := base64.RawURLEncoding.EncodeToString(input)
 	return str
 }
 
-func decodeFromBase64(input []byte) []byte {
+func decodeFromBase64(input []byte) ([]byte, error) {
 	res := make([]byte, len(input))
 	n, err := base64.RawURLEncoding.Decode(res, input)
-	handleErr(err)
-	return res[:n]
+	if err != nil {
+		return nil, err
+	}
+
+	return res[:n], nil
 }
