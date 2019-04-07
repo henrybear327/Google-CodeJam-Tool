@@ -1,0 +1,607 @@
+{  
+   "adventures":[  
+      {  
+         "challenges":[  
+            {  
+               "are_results_final":true,
+               "end_ms":1399753800000,
+               "id":"0000000000050ed0",
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1399744800000,
+               "tasks":[  
+
+               ],
+               "title":"Code Jam to I/O for Women"
+            }
+         ],
+         "competition":4,
+         "competition__str":"CJTIOFW",
+         "id":"0000000000050feb",
+         "reg_end_ms":1419984000000,
+         "reg_start_ms":1388534400000,
+         "title":"Code Jam to I/O for Women 2014"
+      },
+      {  
+         "challenges":[  
+            {  
+               "are_results_final":true,
+               "end_ms":1429993800000,
+               "id":"0000000000050df1",
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1429984800000,
+               "tasks":[  
+
+               ],
+               "title":"Code Jam to I/O for Women"
+            }
+         ],
+         "competition":4,
+         "competition__str":"CJTIOFW",
+         "id":"0000000000050ecf",
+         "reg_end_ms":1451520000000,
+         "reg_start_ms":1420070400000,
+         "title":"Code Jam to I/O for Women 2015"
+      },
+      {  
+         "challenges":[  
+            {  
+               "are_results_final":true,
+               "end_ms":1457811000000,
+               "id":"0000000000051059",
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1457802000000,
+               "tasks":[  
+
+               ],
+               "title":"Code Jam to I/O for Women"
+            }
+         ],
+         "competition":4,
+         "competition__str":"CJTIOFW",
+         "id":"0000000000051058",
+         "reg_end_ms":1483142400000,
+         "reg_start_ms":1451606400000,
+         "title":"Code Jam to I/O for Women 2016"
+      },
+      {  
+         "challenges":[  
+            {  
+               "are_results_final":true,
+               "end_ms":1489260600000,
+               "id":"0000000000050ece",
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1489251600000,
+               "tasks":[  
+
+               ],
+               "title":"Code Jam to I/O for Women"
+            }
+         ],
+         "competition":4,
+         "competition__str":"CJTIOFW",
+         "id":"0000000000050ecd",
+         "reg_end_ms":1514678400000,
+         "reg_start_ms":1483228800000,
+         "title":"Code Jam to I/O for Women 2017"
+      },
+      {  
+         "challenges":[  
+            {  
+               "are_results_final":true,
+               "end_ms":1538344800000,
+               "id":"0000000000050e07",
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1538334000000,
+               "tasks":[  
+
+               ],
+               "title":"Round F"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1521360000000,
+               "id":"0000000000050edf",
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1521349200000,
+               "tasks":[  
+
+               ],
+               "title":"Round A"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1527408000000,
+               "id":"0000000000050ee0",
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1527397200000,
+               "tasks":[  
+
+               ],
+               "title":"Round C"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1532851200000,
+               "id":"0000000000050ee1",
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1532840400000,
+               "tasks":[  
+
+               ],
+               "title":"Round D"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1542528000000,
+               "id":"0000000000050ee2",
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1542517200000,
+               "tasks":[  
+
+               ],
+               "title":"Round H"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1524362400000,
+               "id":"0000000000050ff4",
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1524351600000,
+               "tasks":[  
+
+               ],
+               "title":"Round B"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1535270400000,
+               "id":"0000000000050ff5",
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1535259600000,
+               "tasks":[  
+
+               ],
+               "title":"Round E"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1540137600000,
+               "id":"0000000000051066",
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1540126800000,
+               "tasks":[  
+
+               ],
+               "title":"Round G"
+            }
+         ],
+         "competition":2,
+         "competition__str":"KICK_START",
+         "id":"0000000000050e00",
+         "reg_end_ms":1546214400000,
+         "reg_start_ms":1514764800000,
+         "title":"Kick Start 2018"
+      },
+      {  
+         "challenges":[  
+            {  
+               "are_results_final":true,
+               "end_ms":1518885000000,
+               "id":"000000000005102c",
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1518876000000,
+               "tasks":[  
+
+               ],
+               "title":"Code Jam to I/O for Women"
+            }
+         ],
+         "competition":4,
+         "competition__str":"CJTIOFW",
+         "id":"0000000000050e9a",
+         "reg_end_ms":1546214400000,
+         "reg_start_ms":1514764800000,
+         "title":"Code Jam to I/O for Women 2018"
+      },
+      {  
+         "challenges":[  
+            {  
+               "are_results_final":true,
+               "end_ms":1523152800000,
+               "id":"00000000000000cb",
+               "reg_gives_participant":true,
+               "result_status":30,
+               "result_status__str":"FINALIZED",
+               "start_ms":1523055600000,
+               "tasks":[  
+
+               ],
+               "title":"Qualification Round 2018"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1522605600000,
+               "id":"0000000000000130",
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1522432800000,
+               "tasks":[  
+
+               ],
+               "title":"Practice Session 2018"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1526747400000,
+               "id":"0000000000007706",
+               "result_status":30,
+               "result_status__str":"FINALIZED",
+               "start_ms":1526738400000,
+               "tasks":[  
+
+               ],
+               "title":"Round 2 2018"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1528561800000,
+               "id":"0000000000007707",
+               "result_status":30,
+               "result_status__str":"FINALIZED",
+               "start_ms":1528552800000,
+               "tasks":[  
+
+               ],
+               "title":"Round 3 2018"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1525026600000,
+               "id":"0000000000007764",
+               "result_status":30,
+               "result_status__str":"FINALIZED",
+               "start_ms":1525017600000,
+               "tasks":[  
+
+               ],
+               "title":"Round 1B 2018"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1525519800000,
+               "id":"0000000000007765",
+               "result_status":30,
+               "result_status__str":"FINALIZED",
+               "start_ms":1525510800000,
+               "tasks":[  
+
+               ],
+               "title":"Round 1C 2018"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1533933000000,
+               "id":"0000000000007766",
+               "result_status":30,
+               "result_status__str":"FINALIZED",
+               "start_ms":1533918600000,
+               "tasks":[  
+
+               ],
+               "title":"World Finals 2018"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1523676600000,
+               "id":"0000000000007883",
+               "result_status":30,
+               "result_status__str":"FINALIZED",
+               "start_ms":1523667600000,
+               "tasks":[  
+
+               ],
+               "title":"Round 1A 2018"
+            }
+         ],
+         "competition":1,
+         "competition__str":"CODE_JAM",
+         "id":"0000000000000066",
+         "reg_end_ms":1523152800000,
+         "reg_start_ms":1520362800000,
+         "title":"Google Code Jam 2018"
+      },
+      {  
+         "challenges":[  
+            {  
+               "are_results_final":true,
+               "end_ms":1551389400000,
+               "id":"0000000000050094",
+               "reg_gives_participant":true,
+               "result_status":30,
+               "result_status__str":"FINALIZED",
+               "start_ms":1551375000000,
+               "tasks":[  
+
+               ],
+               "title":"Online Qualification Round"
+            },
+            {  
+               "are_results_final":false,
+               "end_ms":1556377200000,
+               "id":"00000000000501c5",
+               "result_status":10,
+               "result_status__str":"PARTIALLY_HIDDEN",
+               "start_ms":1556359200000,
+               "tasks":[  
+
+               ],
+               "title":"Final Round"
+            }
+         ],
+         "competition":3,
+         "competition__str":"HASH_CODE",
+         "id":"00000000000501c4",
+         "reg_end_ms":1551265200000,
+         "reg_start_ms":1546545600000,
+         "title":"Hash Code 2019"
+      },
+      {  
+         "challenges":[  
+            {  
+               "are_results_final":true,
+               "end_ms":1550343600000,
+               "id":"0000000000050fc5",
+               "reg_gives_participant":true,
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1550334600000,
+               "tasks":[  
+
+               ],
+               "title":"Code Jam to I/O for Women"
+            }
+         ],
+         "competition":4,
+         "competition__str":"CJTIOFW",
+         "id":"000000000005102d",
+         "reg_end_ms":1550343600000,
+         "reg_start_ms":1548874800000,
+         "title":"Code Jam to I/O for Women 2019"
+      },
+      {  
+         "challenges":[  
+            {  
+               "are_results_final":true,
+               "end_ms":1553411700000,
+               "id":"0000000000050e01",
+               "reg_gives_participant":true,
+               "result_status":30,
+               "result_status__str":"FINALIZED",
+               "start_ms":1553400000000,
+               "tasks":[  
+
+               ],
+               "title":"Round A"
+            },
+            {  
+               "are_results_final":false,
+               "end_ms":1571502600000,
+               "id":"0000000000050e02",
+               "reg_gives_participant":true,
+               "result_status":10,
+               "result_status__str":"PARTIALLY_HIDDEN",
+               "start_ms":1571491800000,
+               "tasks":[  
+
+               ],
+               "title":"Round G"
+            },
+            {  
+               "are_results_final":false,
+               "end_ms":1555812000000,
+               "id":"0000000000050eda",
+               "reg_gives_participant":true,
+               "result_status":10,
+               "result_status__str":"PARTIALLY_HIDDEN",
+               "start_ms":1555801200000,
+               "tasks":[  
+
+               ],
+               "title":"Round B"
+            },
+            {  
+               "are_results_final":false,
+               "end_ms":1566720000000,
+               "id":"0000000000050edb",
+               "reg_gives_participant":true,
+               "result_status":10,
+               "result_status__str":"PARTIALLY_HIDDEN",
+               "start_ms":1566709200000,
+               "tasks":[  
+
+               ],
+               "title":"Round E"
+            },
+            {  
+               "are_results_final":false,
+               "end_ms":1569790800000,
+               "id":"0000000000050edc",
+               "reg_gives_participant":true,
+               "result_status":10,
+               "result_status__str":"PARTIALLY_HIDDEN",
+               "start_ms":1569780000000,
+               "tasks":[  
+
+               ],
+               "title":"Round F"
+            },
+            {  
+               "are_results_final":false,
+               "end_ms":1573977600000,
+               "id":"0000000000050edd",
+               "reg_gives_participant":true,
+               "result_status":10,
+               "result_status__str":"PARTIALLY_HIDDEN",
+               "start_ms":1573966800000,
+               "tasks":[  
+
+               ],
+               "title":"Round H"
+            },
+            {  
+               "are_results_final":false,
+               "end_ms":1558872000000,
+               "id":"0000000000050ff2",
+               "reg_gives_participant":true,
+               "result_status":10,
+               "result_status__str":"PARTIALLY_HIDDEN",
+               "start_ms":1558861200000,
+               "tasks":[  
+
+               ],
+               "title":"Round C"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1551024000000,
+               "id":"0000000000051060",
+               "reg_gives_participant":true,
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1550937600000,
+               "tasks":[  
+
+               ],
+               "title":"Practice Round"
+            },
+            {  
+               "are_results_final":false,
+               "end_ms":1564300800000,
+               "id":"0000000000051061",
+               "reg_gives_participant":true,
+               "result_status":10,
+               "result_status__str":"PARTIALLY_HIDDEN",
+               "start_ms":1564290000000,
+               "tasks":[  
+
+               ],
+               "title":"Round D"
+            }
+         ],
+         "competition":2,
+         "competition__str":"KICK_START",
+         "id":"0000000000050ff1",
+         "reg_end_ms":1573977600000,
+         "reg_start_ms":1549303200000,
+         "title":"Kick Start 2019"
+      },
+      {  
+         "challenges":[  
+            {  
+               "are_results_final":false,
+               "end_ms":1555126200000,
+               "id":"0000000000051635",
+               "result_status":10,
+               "result_status__str":"PARTIALLY_HIDDEN",
+               "start_ms":1555117200000,
+               "tasks":[  
+
+               ],
+               "title":"Round 1A 2019"
+            },
+            {  
+               "are_results_final":false,
+               "end_ms":1558197000000,
+               "id":"0000000000051679",
+               "result_status":10,
+               "result_status__str":"PARTIALLY_HIDDEN",
+               "start_ms":1558188000000,
+               "tasks":[  
+
+               ],
+               "title":"Round 2 2019"
+            },
+            {  
+               "are_results_final":false,
+               "end_ms":1556969400000,
+               "id":"00000000000516b9",
+               "result_status":10,
+               "result_status__str":"PARTIALLY_HIDDEN",
+               "start_ms":1556960400000,
+               "tasks":[  
+
+               ],
+               "title":"Round 1C 2019"
+            },
+            {  
+               "are_results_final":true,
+               "end_ms":1554602400000,
+               "id":"0000000000051705",
+               "reg_gives_participant":true,
+               "result_status":20,
+               "result_status__str":"FULLY_VISIBLE",
+               "start_ms":1554505200000,
+               "tasks":[  
+
+               ],
+               "title":"Qualification Round 2019"
+            },
+            {  
+               "are_results_final":false,
+               "end_ms":1556476200000,
+               "id":"0000000000051706",
+               "result_status":10,
+               "result_status__str":"PARTIALLY_HIDDEN",
+               "start_ms":1556467200000,
+               "tasks":[  
+
+               ],
+               "title":"Round 1B 2019"
+            },
+            {  
+               "are_results_final":false,
+               "end_ms":1560011400000,
+               "id":"0000000000051707",
+               "result_status":10,
+               "result_status__str":"PARTIALLY_HIDDEN",
+               "start_ms":1560002400000,
+               "tasks":[  
+
+               ],
+               "title":"Round 3 2019"
+            },
+            {  
+               "are_results_final":false,
+               "end_ms":1565393400000,
+               "id":"0000000000051708",
+               "result_status":10,
+               "result_status__str":"PARTIALLY_HIDDEN",
+               "start_ms":1565379000000,
+               "tasks":[  
+
+               ],
+               "title":"World Finals 2019"
+            }
+         ],
+         "competition":1,
+         "competition__str":"CODE_JAM",
+         "id":"0000000000051672",
+         "reg_end_ms":1554602400000,
+         "reg_start_ms":1551812400000,
+         "title":"Google Code Jam 2019"
+      }
+   ]
+}

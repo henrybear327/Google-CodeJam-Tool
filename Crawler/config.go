@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/BurntSushi/toml"
 )
 
@@ -13,7 +15,9 @@ type tomlConfig struct {
 func parseConfigFile() *tomlConfig {
 	var conf tomlConfig
 	if _, err := toml.DecodeFile("config.toml", &conf); err != nil {
-		handleErr(err)
+		if err != nil {
+			log.Fatalln(err)
+		}
 	}
 
 	return &conf
