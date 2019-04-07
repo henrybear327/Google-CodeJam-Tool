@@ -31,6 +31,7 @@ func main() {
 		apiObject.GetHandleResults(config.Handles)
 	case 2:
 		apiObject.GetAllContestantData(*country)
+		// contest.GetAllContestantData(*country)
 	case 3:
 		apiObject.GetJSONResponse(*url)
 	default:

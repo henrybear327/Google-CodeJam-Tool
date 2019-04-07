@@ -37,6 +37,10 @@ func (t userScores) Swap(i, j int) {
 }
 func (t userScores) Less(i, j int) bool {
 	// sort by rank
+	// tie break by name
+	if t[i].Rank == t[j].Rank {
+		return t[i].Handle < t[j].Handle
+	}
 	return t[i].Rank < t[j].Rank
 }
 

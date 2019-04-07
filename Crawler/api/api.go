@@ -152,3 +152,61 @@ func (data *ContestMetadata) GetJSONResponse(url string) {
 	response := fetchAPI(url)
 	fmt.Println(string(response))
 }
+
+func (data *ContestData) printUserRecord(user *userScore) {
+	fmt.Printf("+====== %-15s (%s) ======+\n", user.Handle, user.Country)
+	fmt.Printf("Rank %v Score %v\n\n", user.Rank, user.Score)
+
+	for _, curTask := range data.challenge.Tasks {
+		fmt.Printf("%-30s ", curTask.Title)
+		totalPoint := 0
+		for _, p := range curTask.Tests {
+			totalPoint += p.Point
+		}
+
+		for _, task := range user.TasksInfo {
+			if curTask.ID == task.TaskID {
+				fmt.Printf("%2d / %2d\n", task.Point, totalPoint)
+				goto found
+			}
+		}
+
+		// not attempted, so no record is present
+		fmt.Printf("%2d / %2d\n", 0, totalPoint)
+	found:
+	}
+}
+
+func (data *ContestData) GetHandleResults(handles []string) {
+	// results := make(userScores, len(handles))
+	// ch := make(chan userScore)
+	// for _, handle := range handles {
+	// 	go data.fetchHandleResult(handle, ch)
+	// }
+
+	// for i := 0; i < len(handles); i++ {
+	// 	results[i] = <-ch
+	// }
+
+	// sort.Sort(results)
+	// for _, user := range results {
+	// 	data.printUserRecord(&user)
+	// }
+}
+
+func (data *ContestData) GetAllContestantData(country string) {
+	for _, contestant := range data.contestants {
+		if len(country) > 0 && contestant.Country == country {
+			data.printUserRecord(&contestant)
+		} else if len(country) == 0 {
+			data.printUserRecord(&contestant)
+		}
+	}
+}
+
+// GetJSONResponse dumps the response from the specified url
+// The url must be one of the api requests
+func (data *ContestData) GetJSONResponse(url string) {
+	response := fetchAPI(url)
+	fmt.Println(string(response))
+}
