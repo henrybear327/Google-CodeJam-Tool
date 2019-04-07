@@ -12,7 +12,7 @@ import (
 type apiType int
 
 const (
-	allContestType apiType = iota
+	allContestsType apiType = iota
 	scoreboardType
 	specificContestType
 	specificHandleType
@@ -56,6 +56,8 @@ func fetchAPIResponse(fetchType apiType, contestID string, param []interface{}) 
 	case specificContestType:
 		contestID := param[0].(string)
 		url = fmt.Sprintf(specificContestAPI, contestID)
+	case allContestsType:
+		url = fmt.Sprintf(allContestsAPI)
 	default:
 		log.Fatalln("Unknown option")
 	}
@@ -78,10 +80,14 @@ func fetchAPIResponse(fetchType apiType, contestID string, param []interface{}) 
 
 		return &response
 	case specificContestType:
-		contestID := param[0].(string)
-		url = fmt.Sprintf(specificContestAPI, contestID)
-
 		var response contestResponse
+		err := json.Unmarshal(result, &response)
+		handleErr(err)
+		// log.Println(response)
+
+		return &response
+	case allContestsType:
+		var response contestsResponse
 		err := json.Unmarshal(result, &response)
 		handleErr(err)
 		// log.Println(response)
@@ -175,4 +181,16 @@ func (data *ContestData) GetAllContestantData(country string) {
 func GetJSONResponse(url string) {
 	response := fetchAPI(url)
 	fmt.Println(string(response))
+}
+
+func GetContestListing() {
+	response := fetchAPIResponse(allContestsType, "", nil).(*contestsResponse)
+
+	for _, contestGroup := range response.Adventures {
+		fmt.Printf("%-30s (%s)\n", contestGroup.Title, contestGroup.CompetitionStr)
+		for _, contest := range contestGroup.Challenges {
+			fmt.Printf("%-30s %-10s %s\n", contest.Title, contest.ContestID, contest.AdditionalInfo)
+		}
+		fmt.Println()
+	}
 }
