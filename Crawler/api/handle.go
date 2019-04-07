@@ -20,18 +20,6 @@ func getHandleSearchPayload(handle string) string {
 	return encodeToBase64(res)
 }
 
-func (data *ContestMetadata) fetchHandleResult(handle string, ch chan userScore) {
-	param := make([]interface{}, 1)
-	param[0] = handle
-	response := fetchAPIResponse(specificHandleType, data.ContestID, param).(*scoreboardResponse)
-
-	if len(response.UserScores) != 1 {
-		log.Fatalln("Incorrect user count", len(response.UserScores))
-	}
-
-	ch <- response.UserScores[0]
-}
-
 func (data *ContestData) fetchHandleResult(handle string, ch chan userScore) {
 	param := make([]interface{}, 1)
 	param[0] = handle

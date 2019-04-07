@@ -11,3 +11,4 @@ After configuring the `config.toml` file, we will be able to get the output like
 Feel free to contribute to the project if you are interested!
 
 ![fetch friend standing](sample.png)
+

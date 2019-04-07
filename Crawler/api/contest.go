@@ -7,19 +7,6 @@ import (
 	"time"
 )
 
-// deprecate
-type ContestMetadata struct {
-	ContestID string
-
-	TotalContestants int
-	StepSize         int
-
-	ContestInfo challenge
-	UserScores  userScores
-
-	sync.Mutex
-}
-
 // ContestData is the object for holding data of a specific contest
 type ContestData struct {
 	contestID string
@@ -172,30 +159,4 @@ func (data *ContestData) FetchContest(ID string, concurrentFetch int, forceFetch
 	}
 
 	return nil
-}
-
-func (data *ContestMetadata) FetchContestInfo() {
-	data.Lock()
-	defer data.Unlock()
-
-	// init
-	data.UserScores = nil
-
-	// fetch contest data
-	param := make([]interface{}, 2)
-	param[0] = 1
-	param[1] = 10
-	result := fetchAPIResponse(scoreboardType, data.ContestID, param).(*scoreboardResponse)
-
-	// set scoreboard
-	data.TotalContestants = result.ScoreboardSize
-
-	// set problem order
-	data.ContestInfo = result.Challenge
-	sort.Sort(data.ContestInfo.Tasks)
-
-	// set step size
-	if data.StepSize == 0 {
-		data.StepSize = 100
-	}
 }

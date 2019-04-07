@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"log"
 	"sort"
 	"sync"
 )
@@ -71,7 +70,7 @@ func getScoreboardPaginationPayload(startingRank, consecutiveRecords int) string
 }
 
 func (data *ContestData) fetchScoreboard(startingRank int, contestantChannel chan userScores, pool chan bool, wg *sync.WaitGroup) {
-	log.Println("Starting from rank", startingRank)
+	// log.Println("Starting from rank", startingRank)
 
 	param := make([]interface{}, 2)
 	param[0] = startingRank
@@ -80,7 +79,7 @@ func (data *ContestData) fetchScoreboard(startingRank int, contestantChannel cha
 
 	contestantChannel <- response.UserScores
 
-	log.Println("Done", startingRank)
+	// log.Println("Done", startingRank)
 	<-pool
 	wg.Done()
 }

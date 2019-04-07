@@ -93,47 +93,6 @@ func fetchAPIResponse(fetchType apiType, contestID string, param []interface{}) 
 	}
 }
 
-func (data *ContestMetadata) printUserRecord(user *userScore) {
-	fmt.Printf("+====== %-15s (%s) ======+\n", user.Handle, user.Country)
-	fmt.Printf("Rank %v Score %v\n\n", user.Rank, user.Score)
-
-	for _, curTask := range data.ContestInfo.Tasks {
-		fmt.Printf("%-30s ", curTask.Title)
-		totalPoint := 0
-		for _, p := range curTask.Tests {
-			totalPoint += p.Point
-		}
-
-		for _, task := range user.TasksInfo {
-			if curTask.ID == task.TaskID {
-				fmt.Printf("%2d / %2d\n", task.Point, totalPoint)
-				goto found
-			}
-		}
-
-		// not attempted, so no record is present
-		fmt.Printf("%2d / %2d\n", 0, totalPoint)
-	found:
-	}
-}
-
-func (data *ContestMetadata) GetHandleResults(handles []string) {
-	results := make(userScores, len(handles))
-	ch := make(chan userScore)
-	for _, handle := range handles {
-		go data.fetchHandleResult(handle, ch)
-	}
-
-	for i := 0; i < len(handles); i++ {
-		results[i] = <-ch
-	}
-
-	sort.Sort(results)
-	for _, user := range results {
-		data.printUserRecord(&user)
-	}
-}
-
 func (data *ContestData) printUserRecord(user *userScore) {
 	fmt.Printf("+====== %-15s (%s) ======+\n", user.Handle, user.Country)
 	fmt.Printf("Rank %v Score %v\n\n", user.Rank, user.Score)

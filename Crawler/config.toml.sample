@@ -7,3 +7,6 @@ handles = [
     "Andychen", 
     "amoshyc"
     ] 
+
+# max go goroutines for performing requests
+concurrentFetch = 200
