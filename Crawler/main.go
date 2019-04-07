@@ -17,6 +17,7 @@ func main() {
 	// load config file
 	config := parseConfigFile()
 
+	// init the contest
 	contest := api.ContestData{}
 	err := contest.FetchContest(config.ContestID, config.ConcurrentFetch, false)
 	if err != nil {
