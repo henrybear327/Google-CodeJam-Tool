@@ -98,7 +98,7 @@ func (data *ContestMetadata) FetchContestInfo() {
 	param := make([]interface{}, 2)
 	param[0] = 1
 	param[1] = 10
-	result := data.fetchAPIResponseBody(scoreboardType, param)
+	result := fetchAPIResponseBody(scoreboardType, data.ContestID, param)
 
 	// set scoreboard
 	data.TotalContestants = result.ScoreboardSize

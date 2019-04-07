@@ -14,7 +14,9 @@ func main() {
 	flag.Parse()
 
 	// init
+	// load config file
 	config := parseConfigFile()
+
 	apiObject := api.ContestMetadata{ContestID: config.ContestID, StepSize: 100}
 	apiObject.FetchContestInfo()
 

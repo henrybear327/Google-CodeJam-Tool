@@ -10,13 +10,6 @@ import (
 	"sync"
 )
 
-const (
-	allContestsAPI     string = "https://codejam.googleapis.com/poll?p=e30"
-	scoreboardAPI      string = "https://codejam.googleapis.com/scoreboard/%s/poll?p=%s"
-	specificContestAPI string = "https://codejam.googleapis.com/dashboard/%s/poll?p=e30"
-	specificHandleAPI  string = "https://codejam.googleapis.com/scoreboard/%s/find?p=%s"
-)
-
 type apiType int
 
 const (
@@ -24,7 +17,13 @@ const (
 	scoreboardType
 	specificContestType
 	specificHandleType
-	dumpJSONResponseType
+)
+
+const (
+	allContestsAPI     string = "https://codejam.googleapis.com/poll?p=e30"
+	scoreboardAPI      string = "https://codejam.googleapis.com/scoreboard/%s/poll?p=%s"
+	specificContestAPI string = "https://codejam.googleapis.com/dashboard/%s/poll?p=e30"
+	specificHandleAPI  string = "https://codejam.googleapis.com/scoreboard/%s/find?p=%s"
 )
 
 type ContestMetadata struct {
@@ -56,19 +55,17 @@ func fetchAPIResponse(url string) []byte {
 	return result
 }
 
-func (data *ContestMetadata) fetchAPIResponseBody(fetchType apiType, param []interface{}) *apiResponse {
+func fetchAPIResponseBody(fetchType apiType, contestID string, param []interface{}) *apiResponse {
 	url := ""
 
 	switch fetchType {
 	case specificHandleType: // handle search
 		handle := param[0].(string)
-		url = fmt.Sprintf(specificHandleAPI, data.ContestID, data.getHandleSearchPayload(handle))
+		url = fmt.Sprintf(specificHandleAPI, contestID, getHandleSearchPayload(handle))
 	case scoreboardType: // dump scoreboard
 		starting := param[0].(int)
 		step := param[1].(int)
-		url = fmt.Sprintf(scoreboardAPI, data.ContestID, data.getScoreboardPaginationPayload(starting, step))
-	case dumpJSONResponseType:
-		url = param[0].(string)
+		url = fmt.Sprintf(scoreboardAPI, contestID, getScoreboardPaginationPayload(starting, step))
 	default:
 		log.Fatalln("Unknown option")
 	}
@@ -136,6 +133,8 @@ func (data *ContestMetadata) GetAllContestantData(country string) {
 	}
 }
 
+// GetJSONResponse dumps the response from the specified url
+// The url must be one of the api requests
 func (data *ContestMetadata) GetJSONResponse(url string) {
 	response := fetchAPIResponse(url)
 	fmt.Println(string(response))

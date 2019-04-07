@@ -57,7 +57,7 @@ type scoreboardPaginationPayload struct {
 	ConsecutiveRecords int `json:"num_consecutive_users"`
 }
 
-func (data *ContestMetadata) getScoreboardPaginationPayload(startingRank, consecutiveRecords int) string {
+func getScoreboardPaginationPayload(startingRank, consecutiveRecords int) string {
 	payload := scoreboardPaginationPayload{StartingRank: startingRank, ConsecutiveRecords: consecutiveRecords}
 	res, err := json.Marshal(payload)
 	handleErr(err)
@@ -74,7 +74,7 @@ func (data *ContestMetadata) fetchAllContestantData(country string) {
 			param := make([]interface{}, 2)
 			param[0] = starting
 			param[1] = step
-			response := data.fetchAPIResponseBody(scoreboardType, param)
+			response := fetchAPIResponseBody(scoreboardType, data.ContestID, param)
 
 			data.Lock()
 			data.UserScores = append(data.UserScores, response.UserScores...)

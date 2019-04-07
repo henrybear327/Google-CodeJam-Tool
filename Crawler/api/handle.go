@@ -13,7 +13,7 @@ type handleSearchPayload struct {
 	PageSize int    `json:"scoreboard_page_size"`
 }
 
-func (data *ContestMetadata) getHandleSearchPayload(handle string) string {
+func getHandleSearchPayload(handle string) string {
 	payload := handleSearchPayload{Handle: handle, PageSize: 1}
 	res, err := json.Marshal(payload)
 	handleErr(err)
@@ -23,7 +23,7 @@ func (data *ContestMetadata) getHandleSearchPayload(handle string) string {
 func (data *ContestMetadata) fetchHandleResult(handle string, ch chan userScore) {
 	param := make([]interface{}, 1)
 	param[0] = handle
-	response := data.fetchAPIResponseBody(specificHandleType, param)
+	response := fetchAPIResponseBody(specificHandleType, data.ContestID, param)
 
 	if len(response.UserScores) != 1 {
 		log.Fatalln("Incorrect user count", len(response.UserScores))
