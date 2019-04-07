@@ -168,8 +168,10 @@ func (data *ContestData) GetHandleResults(handles []string, forceFetch bool) {
 
 func (data *ContestData) GetAllContestantData(country string) {
 	for _, contestant := range data.contestants {
-		if len(country) > 0 && contestant.Country == country {
-			data.printUserRecord(&contestant)
+		if len(country) > 0 {
+			if contestant.Country == country {
+				data.printUserRecord(&contestant)
+			}
 		} else if len(country) == 0 {
 			data.printUserRecord(&contestant)
 		}

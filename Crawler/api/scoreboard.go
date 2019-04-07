@@ -69,7 +69,7 @@ func getScoreboardPaginationPayload(startingRank, consecutiveRecords int) string
 	return encodeToBase64(res)
 }
 
-func (data *ContestData) fetchScoreboard(startingRank int, contestantChannel chan userScores, pool chan bool, wg *sync.WaitGroup) {
+func (data *ContestData) fetchScoreboard(startingRank int, contestantChannel chan userScores, pool chan bool) {
 	// log.Println("Starting from rank", startingRank)
 
 	param := make([]interface{}, 2)
@@ -81,34 +81,29 @@ func (data *ContestData) fetchScoreboard(startingRank int, contestantChannel cha
 
 	// log.Println("Done", startingRank)
 	<-pool
-	wg.Done()
 }
 
-func (data *ContestData) mergeContestants(contestantChannel chan userScores) {
+func (data *ContestData) mergeContestants(contestantChannel chan userScores, wg *sync.WaitGroup) {
 	for {
-		tmp, more := <-contestantChannel
-		if more == false {
-			return
-		}
-		data.contestants = append(data.contestants, tmp...)
+		data.contestants = append(data.contestants, <-contestantChannel...)
+		wg.Done()
 	}
 }
 
 func (data *ContestData) fetchAllContestantData(concurrentFetch int) {
 	contestantChannel := make(chan userScores, concurrentFetch)
 	pool := make(chan bool, concurrentFetch)
-	go data.mergeContestants(contestantChannel)
 
 	var wg sync.WaitGroup
+	go data.mergeContestants(contestantChannel, &wg)
+
 	for i := 1; i <= data.totalContestants; i += data.stepSize {
 		pool <- true
 		wg.Add(1)
-		go data.fetchScoreboard(i, contestantChannel, pool, &wg)
+		go data.fetchScoreboard(i, contestantChannel, pool)
 	}
 
 	wg.Wait()
-	close(pool)
-	close(contestantChannel)
 
 	// sort users by rank
 	sort.Sort(data.contestants)
