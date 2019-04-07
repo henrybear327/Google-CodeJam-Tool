@@ -1,7 +1,7 @@
 package main
 
 import (
-	"GCJ-side-project/Crawler/api"
+	"Google-CodeJam-Tool/Crawler/api"
 	"flag"
 	"log"
 )
