@@ -134,25 +134,6 @@ func (data *ContestMetadata) GetHandleResults(handles []string) {
 	}
 }
 
-func (data *ContestMetadata) GetAllContestantData(country string) {
-	data.fetchAllContestantData(country)
-
-	for _, contestant := range data.UserScores {
-		if len(country) > 0 && contestant.Country == country {
-			data.printUserRecord(&contestant)
-		} else if len(country) == 0 {
-			data.printUserRecord(&contestant)
-		}
-	}
-}
-
-// GetJSONResponse dumps the response from the specified url
-// The url must be one of the api requests
-func (data *ContestMetadata) GetJSONResponse(url string) {
-	response := fetchAPI(url)
-	fmt.Println(string(response))
-}
-
 func (data *ContestData) printUserRecord(user *userScore) {
 	fmt.Printf("+====== %-15s (%s) ======+\n", user.Handle, user.Country)
 	fmt.Printf("Rank %v Score %v\n\n", user.Rank, user.Score)
@@ -177,21 +158,47 @@ func (data *ContestData) printUserRecord(user *userScore) {
 	}
 }
 
-func (data *ContestData) GetHandleResults(handles []string) {
-	// results := make(userScores, len(handles))
-	// ch := make(chan userScore)
-	// for _, handle := range handles {
-	// 	go data.fetchHandleResult(handle, ch)
-	// }
+func (data *ContestData) GetHandleResults(handles []string, forceFetch bool) {
+	results := make(userScores, len(handles))
+	idx := 0
 
-	// for i := 0; i < len(handles); i++ {
-	// 	results[i] = <-ch
-	// }
+	if forceFetch {
+		ch := make(chan userScore)
+		for _, handle := range handles {
+			go data.fetchHandleResult(handle, ch)
+		}
 
-	// sort.Sort(results)
-	// for _, user := range results {
-	// 	data.printUserRecord(&user)
-	// }
+		for i := 0; i < len(handles); i++ {
+			tmp := <-ch
+			if tmp.isEmpty {
+				continue
+			}
+			results[idx] = tmp
+			idx++
+		}
+	} else {
+		// TODO: optimize this part with map
+		for _, handle := range handles {
+			for _, cachedHandle := range data.contestants {
+				if cachedHandle.Handle == handle {
+					results[idx] = cachedHandle
+					idx++
+
+					goto hasMatch
+				}
+			}
+
+			log.Println("Handle", handle, "not found")
+		hasMatch:
+		}
+
+	}
+
+	results = results[:idx]
+	sort.Sort(results)
+	for _, user := range results {
+		data.printUserRecord(&user)
+	}
 }
 
 func (data *ContestData) GetAllContestantData(country string) {
@@ -206,7 +213,7 @@ func (data *ContestData) GetAllContestantData(country string) {
 
 // GetJSONResponse dumps the response from the specified url
 // The url must be one of the api requests
-func (data *ContestData) GetJSONResponse(url string) {
+func GetJSONResponse(url string) {
 	response := fetchAPI(url)
 	fmt.Println(string(response))
 }

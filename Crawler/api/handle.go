@@ -31,3 +31,17 @@ func (data *ContestMetadata) fetchHandleResult(handle string, ch chan userScore)
 
 	ch <- response.UserScores[0]
 }
+
+func (data *ContestData) fetchHandleResult(handle string, ch chan userScore) {
+	param := make([]interface{}, 1)
+	param[0] = handle
+	response := fetchAPIResponse(specificHandleType, data.contestID, param).(*scoreboardResponse)
+
+	if len(response.UserScores) != 1 {
+		log.Printf("Incorrect user count (%v). Should be 1", len(response.UserScores))
+		ch <- userScore{isEmpty: true}
+		return
+	}
+
+	ch <- response.UserScores[0]
+}

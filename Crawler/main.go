@@ -23,17 +23,13 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	apiObject := api.ContestMetadata{ContestID: config.ContestID, StepSize: 100}
-	apiObject.FetchContestInfo()
-
 	switch *operation {
 	case 1:
-		apiObject.GetHandleResults(config.Handles)
+		contest.GetHandleResults(config.Handles, true)
 	case 2:
-		apiObject.GetAllContestantData(*country)
-		// contest.GetAllContestantData(*country)
+		contest.GetAllContestantData(*country)
 	case 3:
-		apiObject.GetJSONResponse(*url)
+		api.GetJSONResponse(*url)
 	default:
 		log.Fatalln("No such operation")
 	}

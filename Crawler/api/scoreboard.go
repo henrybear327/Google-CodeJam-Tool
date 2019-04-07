@@ -53,6 +53,8 @@ type userScore struct {
 	Score2 int64 `json:"score_2"`
 
 	TasksInfo []taskInfo `json:"task_info"`
+
+	isEmpty bool
 }
 
 type scoreboardPaginationPayload struct {
@@ -66,32 +68,6 @@ func getScoreboardPaginationPayload(startingRank, consecutiveRecords int) string
 	res, err := json.Marshal(payload)
 	handleErr(err)
 	return encodeToBase64(res)
-}
-
-func (data *ContestMetadata) fetchAllContestantData(country string) {
-	var wg sync.WaitGroup
-	for i := 1; i <= data.TotalContestants; i += data.StepSize {
-		go func(starting, step int) {
-			wg.Add(1)
-			log.Println("Starting from record", starting)
-
-			param := make([]interface{}, 2)
-			param[0] = starting
-			param[1] = step
-			response := fetchAPIResponse(scoreboardType, data.ContestID, param).(*scoreboardResponse)
-
-			data.Lock()
-			data.UserScores = append(data.UserScores, response.UserScores...)
-			data.Unlock()
-
-			log.Println("Done", starting)
-			wg.Done()
-		}(i, data.StepSize)
-	}
-	wg.Wait()
-
-	// sort by rank
-	sort.Sort(data.UserScores)
 }
 
 func (data *ContestData) fetchScoreboard(startingRank int, contestantChannel chan userScores, pool chan bool, wg *sync.WaitGroup) {
