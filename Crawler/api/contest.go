@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"log"
 	"sort"
 	"sync"
@@ -135,6 +136,8 @@ func (data *ContestData) FetchContest(ID string, concurrentFetch int, forceFetch
 				task.totalPoints += subtask.Point
 			}
 		}
+
+		fmt.Println("Is the result finalized?", data.challenge.AreResultsFinal)
 		log.Println("Done!")
 	}
 
