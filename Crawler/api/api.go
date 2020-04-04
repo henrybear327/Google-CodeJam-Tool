@@ -123,6 +123,7 @@ func (data *ContestData) printUserRecord(user *userScore) {
 	}
 }
 
+// GetHandleResults results the handle results
 func (data *ContestData) GetHandleResults(handles []string, forceFetch bool) {
 	results := make(userScores, len(handles))
 	idx := 0
@@ -166,6 +167,7 @@ func (data *ContestData) GetHandleResults(handles []string, forceFetch bool) {
 	}
 }
 
+// GetAllContestantData returns all contestant's data
 func (data *ContestData) GetAllContestantData(country string) {
 	for _, contestant := range data.contestants {
 		if len(country) > 0 {
@@ -185,6 +187,7 @@ func GetJSONResponse(url string) {
 	fmt.Println(string(response))
 }
 
+// GetContestListing returns a list of contests
 func GetContestListing() {
 	response := fetchAPIResponse(allContestsType, "", nil).(*contestsResponse)
 
