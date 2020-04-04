@@ -112,7 +112,7 @@ func (data *ContestData) printUserRecord(user *userScore) {
 
 		for _, task := range user.TasksInfo {
 			if curTask.ID == task.TaskID {
-				fmt.Printf("%2d / %2d\n", task.Point, totalPoint)
+				fmt.Printf("%2d / %2d (%02d:%02d:%02d)\n", task.Point, totalPoint, task.WAms/1000000/60/60, task.WAms/1000000/60%60, task.WAms/1000000%60)
 				goto found
 			}
 		}
